@@ -8,23 +8,14 @@ server:
     enabled: true
     period: 86400
 chains:
-  - name: "cosmos"
-    key_name: "cosmos"
-    chain_id: "gaia"
-    rpc_endpoint: "http://localhost:26657/"
-    account_prefix: "cosmos"
-    sender: "cosmos1u9vn33qs6jdr3wwq4u2l9p349n9c95uxz2lew0"
-    key: "reopen throw concert garment wash slab jump company habit father below stage float attitude achieve net charge bulb mouse mind fat net hello vague"
+  - name: "landslide"
+    key_name: "wasm"
+    chain_id: "landslide-test"
+    # rpc_endpoint: "http://127.0.0.1:9650/ext/bc/2rUgWwRguT2uAzPFTZSz2XrJiVZhif5Yv6NKGupFj89CJTEfQu/rpc"
+    rpc_endpoint: "http://10.128.78.130:9650/ext/bc/2rUgWwRguT2uAzPFTZSz2XrJiVZhif5Yv6NKGupFj89CJTEfQu/rpc"
+    account_prefix: "wasm"
+    sender: "wasm1kng6sqkm0mjuh09cwz6u86f75lmeflj9h0fqhr"
+    key: "tip yard art tape orchard universe angle flame wave gadget raven coyote crater ethics able evoke luxury predict leopard delay peanut embody blast soap"
     gas_adjustment: 1.2
-    gas_price: "0.01uatom"
-    drop_coin: "10000000uatom"
-  - name: "juno"
-    key_name: "juno"
-    chain_id: "juno"
-    rpc_endpoint: "http://localhost:26658/"
-    account_prefix: "cosmos"
-    sender: "cosmos10hhwf89y3gvum4xyzlyz48zxldjehlqzf4dlwt"
-    key: "predict lonely oxygen category agent wait legend quarter often six liquid search panic panther chuckle glow alone detail bike below dust marriage throw pause"
-    gas_adjustment: 1.2
-    gas_price: "0.01ujuno"
-    drop_coin: "10000000ujuno"
+    gas_price: "0.01stake"
+    drop_coin: "10000000stake"

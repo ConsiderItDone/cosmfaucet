@@ -1,69 +1,70 @@
 version: '3.4'
 
 services:
-  testchain-1:
-    container_name: testchain-1
-    image: tendermint/gaia:v4.2.0
-    restart: always
-    user: root
-    volumes:
-      - ./scripts:/home
-    command:
-      - /bin/sh
-      - -c
-      - |
-        echo "start run single node."
-        /home/init_chain.sh cosmos1u9vn33qs6jdr3wwq4u2l9p349n9c95uxz2lew0 uatom gaia
-    ports:
-      - "26657:26657"
-      - "1317:1317"
-  testchain-2:
-    container_name: testchain-2
-    image: tendermint/gaia:v4.2.0
-    restart: always
-    user: root
-    volumes:
-      - ./scripts:/home
-    command:
-      - /bin/sh
-      - -c
-      - |
-        echo "start run single node."
-        /home/init_chain.sh cosmos10hhwf89y3gvum4xyzlyz48zxldjehlqzf4dlwt ujuno juno
-    ports:
-      - "26658:26657"
-      - "1318:1317"
-  relayer:
-    container_name: relayer
-    image: relayer
-    build:
-      context: ./relayer
-      dockerfile: Dockerfile.relayer
-    volumes:
-      - ./relayer/:/home/relayer/tmp/
-    command:
-      - /bin/sh
-      - -c
-      - |
-        RELAYER_HOME=/home/relayer/.relayer/config
-        
-        while ! nc -z testchain-1 26657; do sleep 1; done
-        while ! nc -z testchain-2 26657; do sleep 1; done
-        
-        # sleep enough for at least two blocks to be issued. 
-        sleep 30;
-        
-        mkdir -p $RELAYER_HOME
-        cp -r /home/relayer/tmp/* $RELAYER_HOME/
-        
-        chmod u+x $RELAYER_HOME/start.sh
-        $RELAYER_HOME/start.sh
+  # testchain-1:
+  #   container_name: testchain-1
+  #   image: tendermint/gaia:v4.2.0
+  #   restart: always
+  #   user: root
+  #   volumes:
+  #     - ./scripts:/home
+  #   command:
+  #     - /bin/sh
+  #     - -c
+  #     - |
+  #       echo "start run single node."
+  #       /home/init_chain.sh cosmos1u9vn33qs6jdr3wwq4u2l9p349n9c95uxz2lew0 uatom gaia
+  #   ports:
+  #     - "26657:26657"
+  #     - "1317:1317"
+  # testchain-2:
+  #   container_name: testchain-2
+  #   image: tendermint/gaia:v4.2.0
+  #   restart: always
+  #   user: root
+  #   volumes:
+  #     - ./scripts:/home
+  #   command:
+  #     - /bin/sh
+  #     - -c
+  #     - |
+  #       echo "start run single node."
+  #       /home/init_chain.sh cosmos10hhwf89y3gvum4xyzlyz48zxldjehlqzf4dlwt ujuno juno
+  #   ports:
+  #     - "26658:26657"
+  #     - "1318:1317"
+  # relayer:
+  #   container_name: relayer
+  #   image: relayer
+  #   build:
+  #     context: ./relayer
+  #     dockerfile: Dockerfile.relayer
+  #   volumes:
+  #     - ./relayer/:/home/relayer/tmp/
+  #   command:
+  #     - /bin/sh
+  #     - -c
+  #     - |
+  #       RELAYER_HOME=/home/relayer/.relayer/config
+  #
+  #       while ! nc -z testchain-1 26657; do sleep 1; done
+  #       while ! nc -z testchain-2 26657; do sleep 1; done
+  #
+  #       # sleep enough for at least two blocks to be issued.
+  #       sleep 30;
+  #
+  #       mkdir -p $RELAYER_HOME
+  #       cp -r /home/relayer/tmp/* $RELAYER_HOME/
+  #
+  #       chmod u+x $RELAYER_HOME/start.sh
+  #       $RELAYER_HOME/start.sh
   faucet:
-    depends_on:
-      - testchain-1
-      - testchain-2
+    # depends_on:
+    #   - testchain-1
+    #   - testchain-2
     build:
       context: ..
+    container_name: cosmfaucet
     restart: always
     volumes:
       - ./configs:/app/config/

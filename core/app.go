@@ -7,14 +7,15 @@ import (
 	"net/http"
 	"os"
 
+	lens "github.com/consideritdone/lens/client"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/rs/cors"
-	"github.com/scalalang2/cosmfaucet/gen/proto/faucetpb"
-	lens "github.com/strangelove-ventures/lens/client"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+
+	"github.com/scalalang2/cosmfaucet/gen/proto/faucetpb"
 )
 
 type ChainId = string
@@ -59,6 +60,7 @@ func NewApp(config *RootConfig) (*App, error) {
 		if ok {
 			return nil, fmt.Errorf("chain with id %s already exists", chain.ChainId)
 		}
+
 		app.clients[chain.ChainId] = cc
 	}
 

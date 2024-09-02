@@ -16,6 +16,6 @@ chains:
     account_prefix: "wasm"
     sender: "wasm1kng6sqkm0mjuh09cwz6u86f75lmeflj9h0fqhr"
     key: "tip yard art tape orchard universe angle flame wave gadget raven coyote crater ethics able evoke luxury predict leopard delay peanut embody blast soap"
-    gas_adjustment: 1.2
+    gas_adjustment: 2
     gas_price: "0.01stake"
-    drop_coin: "10000000stake"
+    drop_coin: "1000000stake"

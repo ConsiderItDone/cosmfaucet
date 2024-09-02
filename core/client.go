@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	lens "github.com/strangelove-ventures/lens/client"
+	lens "github.com/consideritdone/lens/client"
 	"go.uber.org/zap"
 )
 

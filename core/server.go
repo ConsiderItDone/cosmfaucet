@@ -6,11 +6,12 @@ import (
 	"sync"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/scalalang2/cosmfaucet/gen/proto/faucetpb"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
+
+	"github.com/scalalang2/cosmfaucet/gen/proto/faucetpb"
 )
 
 type Server struct {
@@ -103,7 +104,7 @@ func (s *Server) GiveMe(ctx context.Context, request *faucetpb.GiveMeRequest) (*
 
 	if s.limiter != nil {
 		if !s.limiter.IsAllowed(request.ChainId, remoteAddr) {
-			return nil, status.Error(codes.PermissionDenied, "user cannot request token more than once during specific period of time")
+			return nil, status.Error(codes.PermissionDenied, "user cannot request token more than once during 24h")
 		}
 	}
 
